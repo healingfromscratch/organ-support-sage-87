@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Leaf, ArrowRight } from "lucide-react";
@@ -28,15 +27,13 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
 
   const selectedData = getSelectedData();
   
-  // Get organs with scores of 10 or higher for print
   const getHighScoringOrgans = () => {
     return Object.entries(scores)
-      .filter(([_, score]) => score >= 10)
+      .filter(([_, score]) => score >= 5)
       .sort(([, a], [, b]) => b - a)
       .map(([organ, score]) => ({ organ, score }));
   };
   
-  // Render the lifestyle, nutrition, and herbs lists
   const renderList = (items: string[]) => (
     <ul className="space-y-1 list-disc pl-5">
       {items.map((item, index) => (
@@ -47,7 +44,6 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
     </ul>
   );
 
-  // Render the print version of lists
   const renderPrintList = (items: string[]) => (
     <ul className="space-y-0.5 list-disc pl-4">
       {items.map((item, index) => (
@@ -72,7 +68,6 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         </p>
       </div>
       
-      {/* Score summary for print - only show scores 10 or higher */}
       <div className="hidden print:block mb-8">
         <h3 className="text-xl font-serif text-sage-800 mb-3">Summary of Scores</h3>
         {getHighScoringOrgans().length > 0 ? (
@@ -93,11 +88,10 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
             </tbody>
           </table>
         ) : (
-          <p className="text-sage-700 text-sm">No organ systems scored 10 or higher.</p>
+          <p className="text-sage-700 text-sm">No organ systems scored 5 or higher.</p>
         )}
       </div>
       
-      {/* Interactive organ selector - only visible on screen, not in print */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-10 no-print">
         {getOrgansWithScores().map(({ organ, score }, index) => (
           <motion.button
@@ -118,7 +112,6 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         ))}
       </div>
       
-      {/* Selected organ support guide - visible only on screen */}
       <motion.div 
         className="bg-white rounded-xl border border-sage-200 shadow-sm overflow-hidden no-print"
         initial={{ opacity: 0, y: 20 }}
@@ -171,7 +164,6 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         </div>
       </motion.div>
       
-      {/* Print-specific version that shows only high-scoring organs (10 or higher) */}
       <div className="hidden print:block">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-serif text-sage-800 mb-3">Your Personalized Support Guide</h2>
@@ -181,7 +173,7 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
             </p>
           ) : (
             <p className="text-sm text-sage-600 mb-6">
-              No organs scored 10 or higher. Consider continuing to monitor your symptoms.
+              No organs scored 5 or higher. Consider continuing to monitor your symptoms.
             </p>
           )}
         </div>
@@ -236,7 +228,7 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         ) : (
           <div className="text-center p-6 border border-sage-200 rounded-lg">
             <p className="text-sage-700">
-              No organ systems scored 10 or higher. Continue supporting your overall health and monitor your symptoms.
+              No organ systems scored 5 or higher. Continue supporting your overall health and monitor your symptoms.
             </p>
           </div>
         )}
