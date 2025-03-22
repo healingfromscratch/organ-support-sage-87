@@ -9,7 +9,7 @@ const Instructions = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <h3 className="text-lg font-serif mb-3 text-sage-800">How to Use This Questionnaire:</h3>
+      <h3 className="text-xl font-serif mb-3 text-sage-800">Organs of Elimination Questionnaire & Support Guide</h3>
       <p className="text-sage-700 mb-4">
         Score each symptom based on how often you experience it:
       </p>
@@ -32,7 +32,7 @@ const Instructions = () => {
         </div>
       </div>
       <p className="text-sage-700">
-        Tally each section's total to identify which organs may need the most support.
+        Tally your total for each category to identify which systems may need support.
       </p>
     </motion.div>
   );

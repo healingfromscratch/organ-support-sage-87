@@ -39,11 +39,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-sage-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <Header />
         <Instructions />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {symptomsData.map((categoryData, index) => (
             <SymptomCard
               key={categoryData.category}

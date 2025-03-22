@@ -2,50 +2,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Leaf, ArrowRight } from "lucide-react";
-
-type SupportCategory = {
-  organ: string;
-  lifestyle: string;
-  nutrition: string;
-  herbs: string[];
-};
+import { supportData } from "../data/symptoms";
 
 type SupportGuideProps = {
   scores: { [key: string]: number };
 };
-
-const supportData: SupportCategory[] = [
-  {
-    organ: "Liver",
-    lifestyle: "Sleep by 10pm",
-    nutrition: "Bitter greens (e.g. dandelion, arugula)",
-    herbs: ["Milk Thistle", "Dandelion Root", "Schisandra", "Burdock Root"]
-  },
-  {
-    organ: "Digestion",
-    lifestyle: "Mindful eating",
-    nutrition: "Warm, cooked meals",
-    herbs: ["Ginger", "Fennel", "Slippery Elm", "Chamomile"]
-  },
-  {
-    organ: "Kidneys",
-    lifestyle: "Stay hydrated with minerals",
-    nutrition: "Sea salt + lemon water",
-    herbs: ["Nettle", "Parsley", "Corn Silk", "Marshmallow Root"]
-  },
-  {
-    organ: "Skin/Lymph",
-    lifestyle: "Dry brushing or sauna",
-    nutrition: "Hydrating fruits & omega-3s",
-    herbs: ["Red Clover", "Calendula", "Cleavers", "Violet Leaf"]
-  },
-  {
-    organ: "Lungs",
-    lifestyle: "Breathwork or fresh air walks",
-    nutrition: "Warm soups & teas",
-    herbs: ["Mullein", "Elecampane", "Thyme", "Licorice Root"]
-  }
-];
 
 const SupportGuide = ({ scores }: SupportGuideProps) => {
   const [selectedOrgan, setSelectedOrgan] = useState<string | null>(null);
@@ -67,6 +28,28 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
 
   const selectedData = getSelectedData();
   
+  // Render the lifestyle, nutrition, and herbs lists
+  const renderList = (items: string[]) => (
+    <ul className="space-y-1 list-disc pl-5">
+      {items.map((item, index) => (
+        <li key={index} className="text-sage-700 text-sm">
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+
+  // Render the print version of lists
+  const renderPrintList = (items: string[]) => (
+    <ul className="space-y-0.5 list-disc pl-4">
+      {items.map((item, index) => (
+        <li key={index} className="text-sage-700 text-xs">
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+  
   return (
     <motion.div 
       className="mt-16 max-w-4xl mx-auto"
@@ -79,6 +62,27 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         <p className="text-sage-700 max-w-2xl mx-auto">
           Use your top-scoring areas to guide your healing journey. Below are tools to support each organ of elimination using lifestyle practices, nourishing foods, and herbal allies.
         </p>
+      </div>
+      
+      {/* Score summary for print */}
+      <div className="hidden print:block mb-8">
+        <h3 className="text-xl font-serif text-sage-800 mb-3">Summary of Scores</h3>
+        <table className="w-full border-collapse">
+          <thead>
+            <tr>
+              <th className="text-left border-b border-sage-200 py-2 px-3 text-sage-700">Organ System</th>
+              <th className="text-center border-b border-sage-200 py-2 px-3 text-sage-700">Total Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {getOrgansWithScores().map(({ organ, score }) => (
+              <tr key={organ}>
+                <td className="border-b border-sage-100 py-2 px-3 text-sage-800">{organ}</td>
+                <td className="border-b border-sage-100 py-2 px-3 text-center text-sage-800">{score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       
       {/* Interactive organ selector - only visible on screen, not in print */}
@@ -120,16 +124,16 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <h4 className="font-medium text-sage-800 mb-3">Lifestyle Tool</h4>
+              <h4 className="font-medium text-sage-800 mb-3">Lifestyle Practices</h4>
               <div className="bg-sage-50 rounded-lg p-4 border border-sage-200 text-sage-700">
-                {selectedData.lifestyle}
+                {renderList(selectedData.lifestyle)}
               </div>
             </div>
             
             <div className="space-y-2">
-              <h4 className="font-medium text-sage-800 mb-3">Nutrition Tool</h4>
+              <h4 className="font-medium text-sage-800 mb-3">Nutrition Support</h4>
               <div className="bg-sage-50 rounded-lg p-4 border border-sage-200 text-sage-700">
-                {selectedData.nutrition}
+                {renderList(selectedData.nutrition)}
               </div>
             </div>
             
@@ -176,22 +180,22 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
             <div className="p-4 border border-t-0 border-sage-200 rounded-b-lg">
               <div className="grid grid-cols-3 gap-4">
                 <div className="space-y-1">
-                  <h4 className="font-medium text-sage-800 text-sm">Lifestyle Tool</h4>
-                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700 text-sm">
-                    {data.lifestyle}
+                  <h4 className="font-medium text-sage-800 text-sm">Lifestyle Practices</h4>
+                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700">
+                    {renderPrintList(data.lifestyle)}
                   </div>
                 </div>
                 
                 <div className="space-y-1">
-                  <h4 className="font-medium text-sage-800 text-sm">Nutrition Tool</h4>
-                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700 text-sm">
-                    {data.nutrition}
+                  <h4 className="font-medium text-sage-800 text-sm">Nutrition Support</h4>
+                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700">
+                    {renderPrintList(data.nutrition)}
                   </div>
                 </div>
                 
                 <div className="space-y-1">
                   <h4 className="font-medium text-sage-800 text-sm">Herbal Allies</h4>
-                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sm">
+                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200">
                     <div className="flex flex-wrap gap-1">
                       {data.herbs.map((herb) => (
                         <span key={herb} className="herb-tag text-xs">
