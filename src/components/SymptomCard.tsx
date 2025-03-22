@@ -57,7 +57,7 @@ const SymptomCard = ({ title, icon, symptoms, index, updateTotalScore }: Symptom
               id={symptom.id}
               value={scores[symptom.id]}
               onChange={(e) => handleScoreChange(symptom.id, parseInt(e.target.value))}
-              className="score-input"
+              className="score-input no-print"
             >
               {[0, 1, 2, 3].map((value) => (
                 <option key={value} value={value}>
@@ -65,6 +65,9 @@ const SymptomCard = ({ title, icon, symptoms, index, updateTotalScore }: Symptom
                 </option>
               ))}
             </select>
+            <span className="hidden print:block w-8 h-8 rounded-md bg-sage-50 border border-sage-300 flex items-center justify-center font-medium text-sage-800">
+              {scores[symptom.id]}
+            </span>
           </div>
         ))}
       </div>
