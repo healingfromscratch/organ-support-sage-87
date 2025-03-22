@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Leaf, ArrowRight } from "lucide-react";
@@ -66,30 +67,6 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         <p className="text-sage-700 max-w-2xl mx-auto">
           Use your top-scoring areas to guide your healing journey. Below are tools to support each organ of elimination using lifestyle practices, nourishing foods, and herbal allies.
         </p>
-      </div>
-      
-      <div className="hidden print:block mb-8">
-        <h3 className="text-xl font-serif text-sage-800 mb-3">Summary of Scores</h3>
-        {getHighScoringOrgans().length > 0 ? (
-          <table className="w-full border-collapse">
-            <thead>
-              <tr>
-                <th className="text-left border-b border-sage-200 py-2 px-3 text-sage-700">Organ System</th>
-                <th className="text-center border-b border-sage-200 py-2 px-3 text-sage-700">Total Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {getHighScoringOrgans().map(({ organ, score }) => (
-                <tr key={organ}>
-                  <td className="border-b border-sage-100 py-2 px-3 text-sage-800">{organ}</td>
-                  <td className="border-b border-sage-100 py-2 px-3 text-center text-sage-800">{score}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p className="text-sage-700 text-sm">No organ systems scored 5 or higher.</p>
-        )}
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-10 no-print">
