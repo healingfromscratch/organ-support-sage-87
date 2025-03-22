@@ -28,6 +28,14 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
 
   const selectedData = getSelectedData();
   
+  // Get organs with scores of 10 or higher for print
+  const getHighScoringOrgans = () => {
+    return Object.entries(scores)
+      .filter(([_, score]) => score >= 10)
+      .sort(([, a], [, b]) => b - a)
+      .map(([organ, score]) => ({ organ, score }));
+  };
+  
   // Render the lifestyle, nutrition, and herbs lists
   const renderList = (items: string[]) => (
     <ul className="space-y-1 list-disc pl-5">
@@ -64,25 +72,29 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         </p>
       </div>
       
-      {/* Score summary for print */}
+      {/* Score summary for print - only show scores 10 or higher */}
       <div className="hidden print:block mb-8">
         <h3 className="text-xl font-serif text-sage-800 mb-3">Summary of Scores</h3>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="text-left border-b border-sage-200 py-2 px-3 text-sage-700">Organ System</th>
-              <th className="text-center border-b border-sage-200 py-2 px-3 text-sage-700">Total Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {getOrgansWithScores().map(({ organ, score }) => (
-              <tr key={organ}>
-                <td className="border-b border-sage-100 py-2 px-3 text-sage-800">{organ}</td>
-                <td className="border-b border-sage-100 py-2 px-3 text-center text-sage-800">{score}</td>
+        {getHighScoringOrgans().length > 0 ? (
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="text-left border-b border-sage-200 py-2 px-3 text-sage-700">Organ System</th>
+                <th className="text-center border-b border-sage-200 py-2 px-3 text-sage-700">Total Score</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {getHighScoringOrgans().map(({ organ, score }) => (
+                <tr key={organ}>
+                  <td className="border-b border-sage-100 py-2 px-3 text-sage-800">{organ}</td>
+                  <td className="border-b border-sage-100 py-2 px-3 text-center text-sage-800">{score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className="text-sage-700 text-sm">No organ systems scored 10 or higher.</p>
+        )}
       </div>
       
       {/* Interactive organ selector - only visible on screen, not in print */}
@@ -159,56 +171,75 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         </div>
       </motion.div>
       
-      {/* Print-specific version that shows all organs */}
+      {/* Print-specific version that shows only high-scoring organs (10 or higher) */}
       <div className="hidden print:block">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-serif text-sage-800 mb-3">Your Personalized Support Guide</h2>
-          <p className="text-sm text-sage-600 mb-6">
-            Top scoring organs: {getOrgansWithScores().slice(0, 3).map(({organ}) => organ).join(', ')}
-          </p>
+          {getHighScoringOrgans().length > 0 ? (
+            <p className="text-sm text-sage-600 mb-6">
+              Top scoring organs: {getHighScoringOrgans().slice(0, 3).map(({organ}) => organ).join(', ')}
+            </p>
+          ) : (
+            <p className="text-sm text-sage-600 mb-6">
+              No organs scored 10 or higher. Consider continuing to monitor your symptoms.
+            </p>
+          )}
         </div>
         
-        {supportData.map((data) => (
-          <div key={data.organ} className="mb-8 page-break-inside-avoid">
-            <div className="bg-sage-50 p-3 border-b border-sage-200 rounded-t-lg">
-              <h3 className="text-xl font-serif text-sage-800 flex items-center gap-2">
-                <Leaf className="h-5 w-5 text-sage-500" />
-                {data.organ} Support {scores[data.organ] > 0 && <span className="text-sm ml-2">(Score: {scores[data.organ]})</span>}
-              </h3>
-            </div>
+        {getHighScoringOrgans().length > 0 ? (
+          getHighScoringOrgans().map(({organ, score}) => {
+            const data = supportData.find(item => item.organ === organ);
+            if (!data) return null;
             
-            <div className="p-4 border border-t-0 border-sage-200 rounded-b-lg">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="space-y-1">
-                  <h4 className="font-medium text-sage-800 text-sm">Lifestyle Practices</h4>
-                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700">
-                    {renderPrintList(data.lifestyle)}
-                  </div>
+            return (
+              <div key={organ} className="mb-8 page-break-inside-avoid">
+                <div className="bg-sage-50 p-3 border-b border-sage-200 rounded-t-lg">
+                  <h3 className="text-xl font-serif text-sage-800 flex items-center gap-2">
+                    <Leaf className="h-5 w-5 text-sage-500" />
+                    {organ} Support <span className="text-sm ml-2">(Score: {score})</span>
+                  </h3>
                 </div>
                 
-                <div className="space-y-1">
-                  <h4 className="font-medium text-sage-800 text-sm">Nutrition Support</h4>
-                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700">
-                    {renderPrintList(data.nutrition)}
-                  </div>
-                </div>
-                
-                <div className="space-y-1">
-                  <h4 className="font-medium text-sage-800 text-sm">Herbal Allies</h4>
-                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200">
-                    <div className="flex flex-wrap gap-1">
-                      {data.herbs.map((herb) => (
-                        <span key={herb} className="herb-tag text-xs">
-                          {herb}
-                        </span>
-                      ))}
+                <div className="p-4 border border-t-0 border-sage-200 rounded-b-lg">
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="space-y-1">
+                      <h4 className="font-medium text-sage-800 text-sm">Lifestyle Practices</h4>
+                      <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700">
+                        {renderPrintList(data.lifestyle)}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <h4 className="font-medium text-sage-800 text-sm">Nutrition Support</h4>
+                      <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700">
+                        {renderPrintList(data.nutrition)}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <h4 className="font-medium text-sage-800 text-sm">Herbal Allies</h4>
+                      <div className="bg-sage-50 rounded-lg p-3 border border-sage-200">
+                        <div className="flex flex-wrap gap-1">
+                          {data.herbs.map((herb) => (
+                            <span key={herb} className="herb-tag text-xs">
+                              {herb}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            );
+          })
+        ) : (
+          <div className="text-center p-6 border border-sage-200 rounded-lg">
+            <p className="text-sage-700">
+              No organ systems scored 10 or higher. Continue supporting your overall health and monitor your symptoms.
+            </p>
           </div>
-        ))}
+        )}
         
         <div className="mt-8 text-center text-sm">
           <p className="text-sage-600">
