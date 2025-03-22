@@ -35,7 +35,7 @@ export const symptomsData = [
   },
   {
     category: "Skin/Lymph",
-    icon: "RadiationCircle",
+    icon: "Radiation",
     symptoms: [
       { id: "skin-1", text: "Acne or rashes", score: 0 },
       { id: "skin-2", text: "Dry, flaky skin", score: 0 },

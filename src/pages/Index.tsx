@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Activity, Utensils, Droplets, RadiationCircle, Wind } from "lucide-react";
+import { Activity, Utensils, Droplets, Radiation, Wind } from "lucide-react";
 import Header from "@/components/Header";
 import Instructions from "@/components/Instructions";
 import SymptomCard from "@/components/SymptomCard";
@@ -15,8 +15,8 @@ const getIconComponent = (iconName: string) => {
       return <Utensils className="h-5 w-5" />;
     case "Droplets":
       return <Droplets className="h-5 w-5" />;
-    case "RadiationCircle":
-      return <RadiationCircle className="h-5 w-5" />;
+    case "Radiation":
+      return <Radiation className="h-5 w-5" />;
     case "Wind":
       return <Wind className="h-5 w-5" />;
     default:
