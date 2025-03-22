@@ -63,6 +63,10 @@
   .herb-tag {
     @apply inline-flex items-center rounded-full bg-sage-100 px-3 py-1 text-sm text-sage-800 transition-all hover:bg-sage-200;
   }
+
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
 }
 
 /* Custom animations */
@@ -89,7 +93,8 @@
   }
   
   body {
-    font-size: 12pt;
+    font-size: 11pt;
+    background-color: white !important;
   }
   
   .no-print {
@@ -100,5 +105,9 @@
     break-inside: avoid;
     box-shadow: none !important;
     border: 1px solid #e2e8f0 !important;
+  }
+
+  .hidden.print\\:block {
+    display: block !important;
   }
 }

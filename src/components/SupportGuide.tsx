@@ -81,7 +81,8 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-10">
+      {/* Interactive organ selector - only visible on screen, not in print */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-10 no-print">
         {getOrgansWithScores().map(({ organ, score }, index) => (
           <motion.button
             key={organ}
@@ -101,8 +102,9 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
         ))}
       </div>
       
+      {/* Selected organ support guide - visible only on screen */}
       <motion.div 
-        className="bg-white rounded-xl border border-sage-200 shadow-sm overflow-hidden"
+        className="bg-white rounded-xl border border-sage-200 shadow-sm overflow-hidden no-print"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
@@ -152,6 +154,64 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
           </div>
         </div>
       </motion.div>
+      
+      {/* Print-specific version that shows all organs */}
+      <div className="hidden print:block">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-serif text-sage-800 mb-3">Your Personalized Support Guide</h2>
+          <p className="text-sm text-sage-600 mb-6">
+            Top scoring organs: {getOrgansWithScores().slice(0, 3).map(({organ}) => organ).join(', ')}
+          </p>
+        </div>
+        
+        {supportData.map((data) => (
+          <div key={data.organ} className="mb-8 page-break-inside-avoid">
+            <div className="bg-sage-50 p-3 border-b border-sage-200 rounded-t-lg">
+              <h3 className="text-xl font-serif text-sage-800 flex items-center gap-2">
+                <Leaf className="h-5 w-5 text-sage-500" />
+                {data.organ} Support {scores[data.organ] > 0 && <span className="text-sm ml-2">(Score: {scores[data.organ]})</span>}
+              </h3>
+            </div>
+            
+            <div className="p-4 border border-t-0 border-sage-200 rounded-b-lg">
+              <div className="grid grid-cols-3 gap-4">
+                <div className="space-y-1">
+                  <h4 className="font-medium text-sage-800 text-sm">Lifestyle Tool</h4>
+                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700 text-sm">
+                    {data.lifestyle}
+                  </div>
+                </div>
+                
+                <div className="space-y-1">
+                  <h4 className="font-medium text-sage-800 text-sm">Nutrition Tool</h4>
+                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700 text-sm">
+                    {data.nutrition}
+                  </div>
+                </div>
+                
+                <div className="space-y-1">
+                  <h4 className="font-medium text-sage-800 text-sm">Herbal Allies</h4>
+                  <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sm">
+                    <div className="flex flex-wrap gap-1">
+                      {data.herbs.map((herb) => (
+                        <span key={herb} className="herb-tag text-xs">
+                          {herb}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div className="mt-8 text-center text-sm">
+          <p className="text-sage-600">
+            Begin with gentle support for your highest-scoring systems. Always consult with a healthcare provider before starting any new health regimen.
+          </p>
+        </div>
+      </div>
       
       <div className="mt-12 text-center no-print">
         <button 
