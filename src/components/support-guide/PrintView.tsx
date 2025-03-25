@@ -1,5 +1,5 @@
 
-import { Leaf, ExternalLink } from "lucide-react";
+import { Leaf } from "lucide-react";
 
 type OrganScore = {
   organ: string;
@@ -76,7 +76,7 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
               </div>
               
               <div className="p-4 border border-t-0 border-sage-200 rounded-b-lg">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-1">
                     <h4 className="font-medium text-sage-800 text-sm">Lifestyle Practices</h4>
                     <div className="bg-sage-50 rounded-lg p-3 border border-sage-200 text-sage-700">
@@ -106,7 +106,7 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
                 </div>
                 
                 <div className="mt-4 text-center">
-                  <p className="text-sage-700 text-xs">
+                  <p className="text-sage-700 text-xs overflow-hidden text-ellipsis">
                     Shop {organ} Support Products: {getProductUrl(organ)}
                   </p>
                 </div>

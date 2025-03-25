@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { ArrowRight, Mail, Printer } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,28 +46,15 @@ const PrintButton = ({ onSendEmail }: PrintButtonProps) => {
     }
   };
 
-  const handlePrintClick = () => {
-    window.print();
-  };
-
   return (
     <div className="mt-12 text-center no-print">
-      <div className="flex flex-col sm:flex-row justify-center gap-3">
+      <div className="flex justify-center">
         <Button 
           onClick={() => setIsEmailFormOpen(true)}
           className="bg-sage-500 hover:bg-sage-600 text-white"
         >
           Email Me My Personalized Guide
           <Mail className="h-4 w-4 ml-1" />
-        </Button>
-        
-        <Button 
-          onClick={handlePrintClick}
-          variant="outline" 
-          className="border-sage-300 text-sage-700 hover:bg-sage-100"
-        >
-          Print Guide
-          <Printer className="h-4 w-4 ml-1" />
         </Button>
       </div>
 
