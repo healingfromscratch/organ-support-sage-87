@@ -40,6 +40,23 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
       .map(([organ, score]) => ({ organ, score }));
   };
 
+  const getProductUrl = (organ: string): string => {
+    switch (organ) {
+      case "Liver":
+        return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=liver";
+      case "Digestion":
+        return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=digestive";
+      case "Kidneys":
+        return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=kidney";
+      case "Skin/Lymph":
+        return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=lymph";
+      case "Lungs":
+        return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=hist";
+      default:
+        return "https://healingfromscratch.gethealthy.store";
+    }
+  };
+
   const generateEmailContent = () => {
     const highScoringOrgans = getHighScoringOrgans();
     
@@ -101,6 +118,12 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
                   </div>
                 </div>
               </div>
+            </div>
+            
+            <div style="margin-top: 12px; text-align: center;">
+              <p style="font-size: 14px; color: #4a5568;">
+                <a href="${getProductUrl(organ)}" style="color: #68a684; text-decoration: underline;">Shop ${organ} Support Products</a>
+              </p>
             </div>
           </div>
         </div>

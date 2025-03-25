@@ -1,5 +1,5 @@
 
-import { Leaf } from "lucide-react";
+import { Leaf, ExternalLink } from "lucide-react";
 
 type OrganScore = {
   organ: string;
@@ -16,6 +16,23 @@ type SupportData = {
 type PrintViewProps = {
   highScoringOrgans: OrganScore[];
   supportData: SupportData[];
+};
+
+const getProductUrl = (organ: string): string => {
+  switch (organ) {
+    case "Liver":
+      return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=liver";
+    case "Digestion":
+      return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=digestive";
+    case "Kidneys":
+      return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=kidney";
+    case "Skin/Lymph":
+      return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=lymph";
+    case "Lungs":
+      return "https://healingfromscratch.gethealthy.store/catalogsearch/result/?q=hist";
+    default:
+      return "https://healingfromscratch.gethealthy.store";
+  }
 };
 
 const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
@@ -86,6 +103,12 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
                       </div>
                     </div>
                   </div>
+                </div>
+                
+                <div className="mt-4 text-center">
+                  <p className="text-sage-700 text-xs">
+                    Shop {organ} Support Products: {getProductUrl(organ)}
+                  </p>
                 </div>
               </div>
             </div>
