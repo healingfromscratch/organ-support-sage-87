@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Slider } from "@/components/ui/slider";
 
 type Symptom = {
   id: string;
@@ -29,8 +30,8 @@ const SymptomCard = ({ title, icon, symptoms, index, updateTotalScore }: Symptom
     updateTotalScore(title, calculateTotal());
   }, [scores, title, updateTotalScore]);
 
-  const handleScoreChange = (id: string, value: number) => {
-    setScores((prev) => ({ ...prev, [id]: value }));
+  const handleScoreChange = (id: string, value: number[]) => {
+    setScores((prev) => ({ ...prev, [id]: value[0] }));
   };
 
   return (
@@ -47,27 +48,26 @@ const SymptomCard = ({ title, icon, symptoms, index, updateTotalScore }: Symptom
         <h3 className="text-xl font-serif text-sage-800">{title} Symptoms</h3>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-5">
         {symptoms.map((symptom, i) => (
-          <div key={symptom.id} className="flex justify-between items-center">
-            <label htmlFor={symptom.id} className="text-sage-700 flex-1">
-              {symptom.text}
-            </label>
-            <select
+          <div key={symptom.id} className="space-y-2">
+            <div className="flex justify-between items-center">
+              <label htmlFor={symptom.id} className="text-sage-700">
+                {symptom.text}
+              </label>
+              <span className="w-8 h-8 rounded-md bg-sage-100 border border-sage-300 flex items-center justify-center font-medium text-sage-800">
+                {scores[symptom.id]}
+              </span>
+            </div>
+            <Slider
               id={symptom.id}
-              value={scores[symptom.id]}
-              onChange={(e) => handleScoreChange(symptom.id, parseInt(e.target.value))}
-              className="score-input no-print"
-            >
-              {[0, 1, 2, 3].map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
-            <span className="hidden print:block w-8 h-8 rounded-md bg-sage-50 border border-sage-300 flex items-center justify-center font-medium text-sage-800">
-              {scores[symptom.id]}
-            </span>
+              min={0}
+              max={3}
+              step={1}
+              value={[scores[symptom.id]]}
+              onValueChange={(value) => handleScoreChange(symptom.id, value)}
+              className="no-print"
+            />
           </div>
         ))}
       </div>
