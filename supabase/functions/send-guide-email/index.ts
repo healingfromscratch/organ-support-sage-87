@@ -29,12 +29,33 @@ serve(async (req) => {
     }
 
     console.log(`Sending email to ${email}`);
+    
+    // Add Bodoni font and footer information to the email content
+    const enhancedEmailContent = `
+      <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600;700&display=swap">
+        <style>
+          body {
+            font-family: 'Libre Bodoni', serif;
+          }
+        </style>
+      </head>
+      ${emailContent}
+      <div style="margin-top: 40px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; font-family: 'Libre Bodoni', serif;">
+        <p style="font-size: 16px; color: #4a5568; margin-bottom: 5px;">Vanessa Berenstein, MA RD FMN CCH</p>
+        <p style="font-size: 14px; color: #718096; margin-bottom: 5px;">Holistic Dietitian</p>
+        <p style="font-size: 14px; color: #718096; margin-bottom: 5px;">Clinical Herbalist</p>
+        <p style="font-size: 14px; color: #718096;">
+          <a href="https://linktr.ee/healingfromscratch" style="color: #68a684; text-decoration: underline;">https://linktr.ee/healingfromscratch</a>
+        </p>
+      </div>
+    `;
 
     const formData = new FormData();
     formData.append("from", `Healing From Scratch <no-reply@${MAILGUN_DOMAIN}>`);
     formData.append("to", email);
     formData.append("subject", "Your Personalized Healing Guide");
-    formData.append("html", emailContent);
+    formData.append("html", enhancedEmailContent);
 
     const mailgunUrl = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;
     
