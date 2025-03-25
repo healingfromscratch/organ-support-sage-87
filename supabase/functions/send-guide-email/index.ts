@@ -33,8 +33,8 @@ serve(async (req) => {
 
     console.log(`Sending email to ${email} for Healing From Scratch`);
     
-    // Use an absolute URL for the logo
-    const logoUrl = "https://healingfromscratch.com/wp-content/uploads/2021/07/healing-from-scratch-logo.png";
+    // Use the updated URL for the logo
+    const logoUrl = "http://organs.healingfromscratch.com/healing-from-scratch-logo.png";
     
     // Add logo, Bodoni font, and footer information to the email content
     const enhancedEmailContent = `
