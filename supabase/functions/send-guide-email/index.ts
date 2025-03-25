@@ -30,7 +30,7 @@ serve(async (req) => {
 
     console.log(`Sending email to ${email}`);
     
-    // Add Bodoni font and footer information to the email content
+    // Add logo, Bodoni font, and footer information to the email content
     const enhancedEmailContent = `
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600;700&display=swap">
@@ -40,6 +40,9 @@ serve(async (req) => {
           }
         </style>
       </head>
+      <div style="text-align: center; margin-bottom: 30px;">
+        <img src="https://lovable-uploaded-healing-from-scratch.netlify.app/healing-from-scratch-logo.png" alt="Healing From Scratch" style="max-height: 120px; margin: 0 auto;" />
+      </div>
       ${emailContent}
       <div style="margin-top: 40px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; font-family: 'Libre Bodoni', serif;">
         <p style="font-size: 16px; color: #4a5568; margin-bottom: 5px;">Vanessa Berenstein, MA RD FMN CCH</p>
