@@ -33,6 +33,9 @@ serve(async (req) => {
 
     console.log(`Sending email to ${email} for Healing From Scratch`);
     
+    // Use an absolute URL for the logo
+    const logoUrl = "https://healingfromscratch.com/wp-content/uploads/2021/07/healing-from-scratch-logo.png";
+    
     // Add logo, Bodoni font, and footer information to the email content
     const enhancedEmailContent = `
       <head>
@@ -44,7 +47,7 @@ serve(async (req) => {
         </style>
       </head>
       <div style="text-align: center; margin-bottom: 30px;">
-        <img src="https://lovable-uploaded-healing-from-scratch.netlify.app/healing-from-scratch-logo.png" alt="Healing From Scratch" style="max-height: 120px; margin: 0 auto;" />
+        <img src="${logoUrl}" alt="Healing From Scratch" style="max-height: 120px; margin: 0 auto;" />
       </div>
       ${emailContent}
       <div style="margin-top: 40px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; font-family: 'Libre Bodoni', serif;">
