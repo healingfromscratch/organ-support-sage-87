@@ -81,7 +81,7 @@ serve(async (req) => {
     const formData = new FormData();
     formData.append("from", `Healing From Scratch <no-reply@${MAILGUN_DOMAIN}>`);
     formData.append("to", email);
-    formData.append("subject", "Your Personalized Healing Guide");
+    formData.append("subject", "Your Personalized Support Guide");
     formData.append("html", enhancedEmailContent);
 
     const mailgunUrl = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;

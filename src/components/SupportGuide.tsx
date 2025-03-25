@@ -41,6 +41,12 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
       .map(([organ, score]) => ({ organ, score }));
   };
 
+  const getAllOrgansWithScores = () => {
+    return Object.entries(scores)
+      .sort(([, a], [, b]) => b - a)
+      .map(([organ, score]) => ({ organ, score }));
+  };
+
   const getProductUrl = (organ: string): string => {
     switch (organ) {
       case "Liver":
@@ -59,25 +65,25 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
   };
 
   const generateEmailContent = () => {
+    const allOrgans = getAllOrgansWithScores();
     const highScoringOrgans = getHighScoringOrgans();
-    
-    if (highScoringOrgans.length === 0) {
-      return `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #2d3748;">
-          <h2 style="color: #4a5568; font-family: 'Georgia', serif;">Your Personalized Support Guide</h2>
-          <p>No organ systems scored 5 or higher. Continue supporting your overall health and monitor your symptoms.</p>
-          <p style="margin-top: 30px; font-size: 14px; color: #718096;">Begin with gentle support for your highest-scoring systems. Always consult with a healthcare provider before starting any new health regimen.</p>
-        </div>
-      `;
-    }
     
     let emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #2d3748;">
         <h2 style="color: #4a5568; font-family: 'Georgia', serif;">Your Personalized Support Guide</h2>
-        <p>Top scoring organs: ${highScoringOrgans.slice(0, 3).map(({organ}) => organ).join(', ')}</p>
     `;
     
-    highScoringOrgans.forEach(({ organ, score }) => {
+    if (highScoringOrgans.length > 0) {
+      emailContent += `
+        <p>Top scoring organs: ${highScoringOrgans.slice(0, 3).map(({organ}) => organ).join(', ')}</p>
+      `;
+    } else {
+      emailContent += `
+        <p>No organ systems scored 5 or higher. Below are recommendations for all systems to support your overall health.</p>
+      `;
+    }
+    
+    allOrgans.forEach(({ organ, score }) => {
       const organData = supportData.find(item => item.organ === organ);
       if (!organData) return;
       
