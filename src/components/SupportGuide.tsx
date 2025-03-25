@@ -7,6 +7,7 @@ import SupportDetails from "./support-guide/SupportDetails";
 import PrintView from "./support-guide/PrintView";
 import PrintButton from "./support-guide/PrintButton";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 type SupportGuideProps = {
   scores: { [key: string]: number };
@@ -141,22 +142,28 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
   };
   
   const sendEmail = async (email: string) => {
-    // In a production environment, you should always handle this on the backend
-    // This is a simplified example for demonstration purposes
     const emailContent = generateEmailContent();
     
-    // For security reasons, we'll show a toast explaining what would happen in a real implementation
-    toast({
-      title: "Development Mode",
-      description: "In a production app, this would send an email using Mailgun's API via a secure backend endpoint.",
-    });
-    
-    // Simulate an API call
-    return new Promise<void>((resolve) => {
-      console.log(`Would send email to: ${email}`);
-      console.log(`Email content: ${emailContent.substring(0, 150)}...`);
-      setTimeout(resolve, 1500);
-    });
+    try {
+      // Call the Supabase Edge Function to send the email
+      const { data, error } = await supabase.functions.invoke("send-guide-email", {
+        body: {
+          email: email,
+          emailContent: emailContent
+        }
+      });
+      
+      if (error) {
+        console.error("Error calling send-guide-email function:", error);
+        throw new Error(error.message || "Failed to send email");
+      }
+      
+      console.log("Email sent successfully:", data);
+      
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw error;
+    }
   };
   
   return (

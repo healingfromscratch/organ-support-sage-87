@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Form, FormField, FormItem, FormControl } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 type PrintButtonProps = {
   onSendEmail: (email: string) => Promise<void>;
@@ -45,18 +46,33 @@ const PrintButton = ({ onSendEmail }: PrintButtonProps) => {
     }
   };
 
+  const handlePrintClick = () => {
+    window.print();
+  };
+
   return (
     <div className="mt-12 text-center no-print">
-      {!isEmailFormOpen ? (
+      <div className="flex flex-col sm:flex-row justify-center gap-3">
         <Button 
           onClick={() => setIsEmailFormOpen(true)}
           className="bg-sage-500 hover:bg-sage-600 text-white"
         >
           Email Me My Personalized Guide
-          <Mail className="h-4 w-4" />
+          <Mail className="h-4 w-4 ml-1" />
         </Button>
-      ) : (
-        <div className="max-w-md mx-auto p-4 bg-white rounded-lg border border-sage-200 shadow-sm">
+        
+        <Button 
+          onClick={handlePrintClick}
+          variant="outline" 
+          className="border-sage-300 text-sage-700 hover:bg-sage-100"
+        >
+          Print Guide
+          <Printer className="h-4 w-4 ml-1" />
+        </Button>
+      </div>
+
+      {isEmailFormOpen && (
+        <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded-lg border border-sage-200 shadow-sm">
           <h4 className="text-sage-800 font-medium mb-4">Enter your email</h4>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
@@ -93,7 +109,7 @@ const PrintButton = ({ onSendEmail }: PrintButtonProps) => {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Sending..." : "Send Email"}
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 ml-1" />
                 </Button>
               </div>
             </form>
