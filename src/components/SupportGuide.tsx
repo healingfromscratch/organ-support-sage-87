@@ -7,7 +7,6 @@ import SupportDetails from "./support-guide/SupportDetails";
 import PrintView from "./support-guide/PrintView";
 import PrintButton from "./support-guide/PrintButton";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 type SupportGuideProps = {
   scores: { [key: string]: number };
@@ -151,19 +150,24 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
     const emailContent = generateEmailContent();
     
     try {
-      // Call the Supabase Edge Function to send the email
-      const { data, error } = await supabase.functions.invoke("send-guide-email", {
-        body: {
+      // Call the Netlify serverless function instead of Supabase
+      const response = await fetch('/.netlify/functions/send-guide-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           email: email,
           emailContent: emailContent
-        }
+        })
       });
       
-      if (error) {
-        console.error("Error calling send-guide-email function:", error);
-        throw new Error(error.message || "Failed to send email");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send email");
       }
       
+      const data = await response.json();
       console.log("Email sent successfully:", data);
       
     } catch (error) {
