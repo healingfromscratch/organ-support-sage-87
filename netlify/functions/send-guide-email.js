@@ -7,6 +7,8 @@ const FormData = require('form-data');
 // Go to Site settings > Build & deploy > Environment variables
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN;
+const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
+const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID;
 
 exports.handler = async (event, context) => {
   // Set CORS headers
@@ -66,6 +68,7 @@ exports.handler = async (event, context) => {
       </div>
     `;
 
+    // Send email via Mailgun
     const formData = new FormData();
     formData.append("from", `Healing From Scratch <no-reply@${MAILGUN_DOMAIN}>`);
     formData.append("to", email);
@@ -89,6 +92,41 @@ exports.handler = async (event, context) => {
 
     if (!response.ok) {
       throw new Error(`Mailgun error: ${mailgunResponse.message || "Unknown error"}`);
+    }
+
+    // Add subscriber to Beehiiv if API key and publication ID are provided
+    if (BEEHIIV_API_KEY && BEEHIIV_PUBLICATION_ID) {
+      try {
+        console.log(`Adding ${email} to Beehiiv mailing list`);
+        
+        const beehiivUrl = `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions`;
+        
+        const beehiivResponse = await fetch(beehiivUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${BEEHIIV_API_KEY}`
+          },
+          body: JSON.stringify({
+            email: email,
+            utm_source: "healing_from_scratch_quiz",
+            reactivate_existing: true,
+            send_welcome_email: true
+          })
+        });
+        
+        const beehiivData = await beehiivResponse.json();
+        console.log("Beehiiv response:", beehiivData);
+        
+        if (!beehiivResponse.ok) {
+          console.error("Beehiiv API error:", beehiivData);
+        }
+      } catch (beehiivError) {
+        // Log the error but don't fail the function, as the email was still sent
+        console.error("Error adding subscriber to Beehiiv:", beehiivError);
+      }
+    } else {
+      console.log("Skipping Beehiiv integration - missing API key or publication ID");
     }
 
     return {
