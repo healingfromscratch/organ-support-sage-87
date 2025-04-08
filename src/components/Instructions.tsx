@@ -11,9 +11,7 @@ const Instructions = () => {
     delay: 0.2
   }}>
       <h3 className="text-xl font-serif mb-3 text-sage-800">Organs of Elimination Questionnaire & Support Guide</h3>
-      <p className="text-sage-700 mb-4">
-        Score each symptom based on how often you experience it:
-      </p>
+      <p className="text-sage-700 mb-4">Organs of Elimination Questionnaire</p>
       <div className="flex justify-center gap-4 md:gap-8 text-sm md:text-base mb-4">
         <div className="flex flex-col items-center">
           <span className="w-8 h-8 flex items-center justify-center bg-white rounded-full border border-sage-200 mb-1">0</span>
