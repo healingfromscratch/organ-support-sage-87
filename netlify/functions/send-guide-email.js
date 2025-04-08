@@ -3,13 +3,6 @@
 const fetch = require('node-fetch');
 const FormData = require('form-data');
 
-// These environment variables need to be set in Netlify UI
-// Go to Site settings > Build & deploy > Environment variables
-const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
-const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN;
-const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
-const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID;
-
 exports.handler = async (event, context) => {
   // Set CORS headers
   const headers = {
@@ -27,6 +20,27 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Check for required environment variables first
+  const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
+  const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN;
+  
+  if (!MAILGUN_API_KEY || !MAILGUN_DOMAIN) {
+    console.error("Missing required environment variables:", {
+      hasMailgunKey: !!MAILGUN_API_KEY,
+      hasMailgunDomain: !!MAILGUN_DOMAIN
+    });
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ 
+        error: "Server configuration error: Missing required Mailgun environment variables" 
+      })
+    };
+  }
+
+  const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
+  const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID;
+
   try {
     // Parse request body
     const { email, emailContent } = JSON.parse(event.body);
@@ -40,6 +54,7 @@ exports.handler = async (event, context) => {
     }
 
     console.log(`Sending email to ${email} for Healing From Scratch`);
+    console.log(`Using Mailgun domain: ${MAILGUN_DOMAIN}`);
     
     // Use the updated URL for the logo
     const logoUrl = "http://organs.healingfromscratch.com/healing-from-scratch-logo.png";
@@ -79,6 +94,8 @@ exports.handler = async (event, context) => {
     
     const auth = Buffer.from(`api:${MAILGUN_API_KEY}`).toString('base64');
     
+    console.log(`Sending request to Mailgun at: ${mailgunUrl}`);
+    
     const response = await fetch(mailgunUrl, {
       method: "POST",
       headers: {
@@ -87,12 +104,23 @@ exports.handler = async (event, context) => {
       body: formData
     });
 
-    const mailgunResponse = await response.json();
-    console.log("Mailgun response:", mailgunResponse);
-
+    // Better error handling for Mailgun response
     if (!response.ok) {
-      throw new Error(`Mailgun error: ${mailgunResponse.message || "Unknown error"}`);
+      const responseText = await response.text();
+      console.error("Mailgun error response:", responseText);
+      
+      try {
+        // Try to parse as JSON if possible
+        const errorJson = JSON.parse(responseText);
+        throw new Error(`Mailgun error: ${errorJson.message || JSON.stringify(errorJson)}`);
+      } catch (parseError) {
+        // If not JSON, use the raw text
+        throw new Error(`Mailgun error: ${responseText}`);
+      }
     }
+    
+    const mailgunResponse = await response.json();
+    console.log("Mailgun success response:", mailgunResponse);
 
     // Add subscriber to Beehiiv if API key and publication ID are provided
     if (BEEHIIV_API_KEY && BEEHIIV_PUBLICATION_ID) {
