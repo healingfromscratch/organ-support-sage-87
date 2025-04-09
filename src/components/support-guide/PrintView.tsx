@@ -119,7 +119,7 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
                   Shop {data.organ} Support Products: {getProductUrl(data.organ)}
                 </p>
                 <p className="text-sage-600 text-xs mt-2">
-                  Begin with gentle support for this system. Some of the herbs listed in this guide can interact with medication. Always consult with a healthcare provider before starting any new health regimen.
+                  Begin with gentle support for this system. Some of the herbs listed in this guide can interact with medication. Always consult with a healthcare provider before starting any new health regimen. For more support: calendly.com/healingfromscratch/customhealthroadmap
                 </p>
               </div>
             </div>

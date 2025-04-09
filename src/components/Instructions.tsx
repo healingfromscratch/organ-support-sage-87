@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 const Instructions = () => {
   return <motion.div className="mb-8 max-w-2xl mx-auto bg-sage-50 rounded-lg border border-sage-200 p-4 md:p-6" initial={{
@@ -10,7 +11,7 @@ const Instructions = () => {
     duration: 0.5,
     delay: 0.2
   }}>
-      <h3 className="text-xl font-serif mb-3 text-sage-800">Organs of Elimination Questionnaire</h3>
+      <h3 className="text-xl font-serif mb-3 text-sage-800 text-center">Organs of Elimination Questionnaire</h3>
       <p className="text-sage-700 mb-4">
     </p>
       <div className="flex justify-center gap-4 md:gap-8 text-sm md:text-base mb-4">

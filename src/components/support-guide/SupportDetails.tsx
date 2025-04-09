@@ -114,7 +114,7 @@ const SupportDetails = ({ data }: SupportDetailsProps) => {
           </Button>
           
           <p className="text-sage-600 text-sm">
-            Begin with gentle support for this system. Some of the herbs listed in this guide can interact with medication. Always consult with a healthcare provider before starting any new health regimen.
+            Begin with gentle support for this system. Some of the herbs listed in this guide can interact with medication. Always consult with a healthcare provider before starting any new health regimen. For more support, <a href="https://calendly.com/healingfromscratch/customhealthroadmap" target="_blank" rel="noopener noreferrer" className="text-sage-600 underline hover:text-sage-800">click here</a> to schedule a Custom Health Roadmap Session.
           </p>
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { supportData } from "../data/symptoms";
@@ -23,7 +22,7 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
   const getOrgansWithScores = () => {
     return Object.entries(scores)
       .sort(([, a], [, b]) => b - a)
-      .map(([organ, score]) => ({ organ, score }));
+      .map(([organ]) => ({ organ, score }));
   };
   
   const getSelectedData = () => {
@@ -100,7 +99,12 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
                 <h4 style="color: #4a5568; font-weight: 500; font-size: 14px; margin-bottom: 8px;">Lifestyle Practices</h4>
                 <div style="background-color: #f7f9f7; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
                   <ul style="margin: 0; padding-left: 20px; color: #4b5563; font-size: 14px;">
-                    ${organData.lifestyle.map(item => `<li>${item}</li>`).join('')}
+                    ${organData.lifestyle.map(item => {
+                      if (item.includes("Breathwork") || item.includes("Diaphragmatic breathing")) {
+                        return `<li>${item} (<a href="https://www.instagram.com/reel/C8Ihw0bRXcp/" style="color: #68a684;">link</a>)</li>`;
+                      }
+                      return `<li>${item}</li>`;
+                    }).join('')}
                   </ul>
                 </div>
               </div>
@@ -122,6 +126,11 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
                       <span style="display: inline-block; background-color: #edf2f7; padding: 4px 8px; border-radius: 9999px; font-size: 12px; color: #4a5568;">${herb}</span>
                     `).join('')}
                   </div>
+                  ${organ === "Digestion" ? `
+                    <p style="margin-top: 12px; font-style: italic; font-weight: 500; color: #4a5568; font-size: 12px;">
+                      *Note: These are general herbal recommendations. If you have bloating or SIBO, Fennel, Plantain and Chamomile may not be supportive. See a Functional Dietitian for more support.
+                    </p>
+                  ` : ''}
                 </div>
               </div>
             </div>
@@ -129,6 +138,9 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
             <div style="margin-top: 12px; text-align: center;">
               <p style="font-size: 14px; color: #4a5568;">
                 <a href="${getProductUrl(organ)}" style="color: #68a684; text-decoration: underline;">Shop ${organ} Support Products</a>
+              </p>
+              <p style="font-size: 13px; color: #718096; margin-top: 8px;">
+                Begin with gentle support for this system. Some of the herbs listed in this guide can interact with medication. Always consult with a healthcare provider before starting any new health regimen. For more support, <a href="https://calendly.com/healingfromscratch/customhealthroadmap" style="color: #68a684; text-decoration: underline;">click here</a> to schedule a Custom Health Roadmap Session.
               </p>
             </div>
           </div>
@@ -150,7 +162,6 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
     const emailContent = generateEmailContent();
     
     try {
-      // Call the Netlify serverless function instead of Supabase
       const response = await fetch('/.netlify/functions/send-guide-email', {
         method: 'POST',
         headers: {
