@@ -1,3 +1,4 @@
+
 import { Leaf } from "lucide-react";
 import { motion } from "framer-motion";
 const Header = () => {
@@ -31,7 +32,7 @@ const Header = () => {
       <h2 className="text-xl md:text-2xl font-serif text-sage-600 italic">
         Questionnaire & Support Guide
       </h2>
-      <p className="mt-4 max-w-2xl mx-auto text-sage-700">Discover which of your body’s elimination pathways need the most support to enhance your overall health and vitality. Fill out the questionnaire as honestly as possible to gain insight into where your system may be most vulnerable and where to focus your support</p>
+      <p className="mt-4 max-w-2xl mx-auto text-sage-700">Discover which of your body's elimination pathways need the most support to enhance your overall health and vitality. Fill out the questionnaire as honestly as possible to gain insight into where your system may be most vulnerable and where to focus your support.</p>
     </motion.header>;
 };
 export default Header;

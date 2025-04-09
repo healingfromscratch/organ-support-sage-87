@@ -40,7 +40,13 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
     <ul className="space-y-0.5 list-disc pl-4">
       {items.map((item, index) => (
         <li key={index} className="text-sage-700 text-xs">
-          {item}
+          {item.includes("Breathwork") || item.includes("Diaphragmatic breathing") ? (
+            <>
+              {item} <span className="text-sage-500">(www.instagram.com/reel/C8Ihw0bRXcp/)</span>
+            </>
+          ) : (
+            item
+          )}
         </li>
       ))}
     </ul>
@@ -99,6 +105,11 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
                         </span>
                       ))}
                     </div>
+                    {data.organ === "Digestion" && (
+                      <p className="mt-2 text-sage-600 italic font-medium text-xs">
+                        *Note: These are general herbal recommendations. If you have bloating or SIBO, Fennel, Plantain and Chamomile may not be supportive. See a Functional Dietitian for more support.
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -106,6 +117,9 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
               <div className="mt-4 text-center">
                 <p className="text-sage-700 text-xs overflow-hidden text-ellipsis">
                   Shop {data.organ} Support Products: {getProductUrl(data.organ)}
+                </p>
+                <p className="text-sage-600 text-xs mt-2">
+                  Begin with gentle support for this system. Some of the herbs listed in this guide can interact with medication. Always consult with a healthcare provider before starting any new health regimen.
                 </p>
               </div>
             </div>

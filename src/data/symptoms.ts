@@ -5,15 +5,16 @@ export const symptomsData = [
     icon: "Activity",
     symptoms: [
       { id: "liver-1", text: "Headaches behind the eyes", score: 0 },
-      { id: "liver-2", text: "Anger or irritability", score: 0 },
-      { id: "liver-3", text: "Chemical sensitivity", score: 0 },
-      { id: "liver-4", text: "Pain or tightness on right side", score: 0 },
-      { id: "liver-5", text: "Waking between 1–3 a.m.", score: 0 },
-      { id: "liver-6", text: "Nausea (especially with fatty foods)", score: 0 },
-      { id: "liver-7", text: "Hormonal symptoms (PMS, acne)", score: 0 },
-      { id: "liver-8", text: "Bitter taste in mouth", score: 0 },
-      { id: "liver-9", text: "Oily or congested skin", score: 0 },
-      { id: "liver-10", text: "Blurry vision or eye strain", score: 0 }
+      { id: "liver-2", text: "Anger", score: 0 },
+      { id: "liver-3", text: "Irritability", score: 0 },
+      { id: "liver-4", text: "Chemical sensitivity", score: 0 },
+      { id: "liver-5", text: "Pain or tightness on right side", score: 0 },
+      { id: "liver-6", text: "Waking between 1–3 a.m.", score: 0 },
+      { id: "liver-7", text: "Nausea (especially with fatty foods)", score: 0 },
+      { id: "liver-8", text: "Hormonal symptoms (PMS, acne)", score: 0 },
+      { id: "liver-9", text: "Bitter taste in mouth", score: 0 },
+      { id: "liver-10", text: "Oily or congested skin", score: 0 },
+      { id: "liver-11", text: "Blurry vision or eye strain", score: 0 }
     ]
   },
   {
@@ -23,13 +24,14 @@ export const symptomsData = [
       { id: "digestion-1", text: "Bloating after meals", score: 0 },
       { id: "digestion-2", text: "Indigestion or reflux", score: 0 },
       { id: "digestion-3", text: "Bowel movement less than 1x/day or loose stools", score: 0 },
-      { id: "digestion-4", text: "Gas or burping", score: 0 },
-      { id: "digestion-5", text: "Undigested food in stool", score: 0 },
-      { id: "digestion-6", text: "Coated tongue or bad breath", score: 0 },
-      { id: "digestion-7", text: "Fatigue after eating", score: 0 },
-      { id: "digestion-8", text: "Hemorrhoids or rectal pressure", score: 0 },
-      { id: "digestion-9", text: "Floating or greasy stools", score: 0 },
-      { id: "digestion-10", text: "Craving sugar or carbs", score: 0 }
+      { id: "digestion-4", text: "Gas", score: 0 },
+      { id: "digestion-5", text: "Burping", score: 0 },
+      { id: "digestion-6", text: "Undigested food in stool", score: 0 },
+      { id: "digestion-7", text: "Coated tongue or bad breath", score: 0 },
+      { id: "digestion-8", text: "Fatigue after eating", score: 0 },
+      { id: "digestion-9", text: "Hemorrhoids or rectal pressure", score: 0 },
+      { id: "digestion-10", text: "Floating or greasy stools", score: 0 },
+      { id: "digestion-11", text: "Craving sugar or carbs", score: 0 }
     ]
   },
   {
@@ -40,12 +42,13 @@ export const symptomsData = [
       { id: "kidneys-2", text: "Low back pain or weakness", score: 0 },
       { id: "kidneys-3", text: "Puffiness or swelling", score: 0 },
       { id: "kidneys-4", text: "Frequent urination", score: 0 },
-      { id: "kidneys-5", text: "Craving salt or dehydration", score: 0 },
-      { id: "kidneys-6", text: "Fatigue in morning or late afternoon", score: 0 },
-      { id: "kidneys-7", text: "Brain fog or poor concentration", score: 0 },
-      { id: "kidneys-8", text: "Cold hands and feet", score: 0 },
-      { id: "kidneys-9", text: "Dizziness or lightheadedness", score: 0 },
-      { id: "kidneys-10", text: "Low libido", score: 0 }
+      { id: "kidneys-5", text: "Craving salt", score: 0 },
+      { id: "kidneys-6", text: "Dehydration", score: 0 },
+      { id: "kidneys-7", text: "Fatigue in morning or late afternoon", score: 0 },
+      { id: "kidneys-8", text: "Brain fog or poor concentration", score: 0 },
+      { id: "kidneys-9", text: "Cold hands and feet", score: 0 },
+      { id: "kidneys-10", text: "Dizziness or lightheadedness", score: 0 },
+      { id: "kidneys-11", text: "Low libido", score: 0 }
     ]
   },
   {
@@ -61,7 +64,8 @@ export const symptomsData = [
       { id: "skin-7", text: "Boils or cystic acne", score: 0 },
       { id: "skin-8", text: "Chronic hives or redness", score: 0 },
       { id: "skin-9", text: "Feeling heavy or sluggish in body", score: 0 },
-      { id: "skin-10", text: "Slow wound healing", score: 0 }
+      { id: "skin-10", text: "Slow wound healing", score: 0 },
+      { id: "skin-11", text: "Rarely sweating", score: 0 }
     ]
   },
   {
@@ -72,12 +76,13 @@ export const symptomsData = [
       { id: "lungs-2", text: "Post-nasal drip", score: 0 },
       { id: "lungs-3", text: "Frequent colds or coughs", score: 0 },
       { id: "lungs-4", text: "Sinus congestion", score: 0 },
-      { id: "lungs-5", text: "Chest tightness or wheezing", score: 0 },
-      { id: "lungs-6", text: "Excess mucus in throat or lungs", score: 0 },
-      { id: "lungs-7", text: "Dry or irritated throat", score: 0 },
-      { id: "lungs-8", text: "Sensitivity to smoke or pollutants", score: 0 },
-      { id: "lungs-9", text: "Shortness of breath", score: 0 },
-      { id: "lungs-10", text: "Suppressed emotions or grief", score: 0 }
+      { id: "lungs-5", text: "Chest tightness", score: 0 },
+      { id: "lungs-6", text: "Wheezing", score: 0 },
+      { id: "lungs-7", text: "Excess mucus in throat or lungs", score: 0 },
+      { id: "lungs-8", text: "Dry or irritated throat", score: 0 },
+      { id: "lungs-9", text: "Sensitivity to smoke or pollutants", score: 0 },
+      { id: "lungs-10", text: "Shortness of breath", score: 0 },
+      { id: "lungs-11", text: "Suppressed emotions or grief", score: 0 }
     ]
   }
 ];
@@ -86,36 +91,37 @@ export const supportData = [
   {
     organ: "Liver",
     lifestyle: [
-      "Sleep by 10 p.m.",
-      "Emotional release",
+      "Aim for an early bed time of 10pm",
+      "Emotional release practices such as Breathwork, Mindful Dance, Shaking (TRE), Crying with full permission, Scream therapy",
       "Limit alcohol and toxin exposure",
       "Use castor oil packs 2–3x/week"
     ],
     nutrition: [
       "Eat bitter vegetables daily",
-      "Incorporate greens, broccoli, beets, and colorful vegetables often",
+      "Incorporate greens, beets, and colorful vegetables often",
       "Drink lemon water or apple cider vinegar before meals",
-      "Include cruciferous vegetables"
+      "Include well cooked cruciferous vegetables (broccoli, collard greens, kale, etc)"
     ],
     herbs: ["Milk Thistle", "Dandelion Root", "Schisandra", "Burdock Root", "Artichoke Leaf"]
   },
   {
     organ: "Digestion",
     lifestyle: [
-      "Eat mindfully",
-      "Regular mealtimes",
-      "Avoid late-night eating",
-      "Reduce stress during meals",
-      "Sit upright after meals"
+      "Eat slowly and mindfully",
+      "Take at least 3 deep breaths before eating",
+      "Apply stress reduction practices",
+      "Try Gut-directed Hypnosis"
     ],
     nutrition: [
-      "Warm, cooked meals",
-      "Eat bitter veggies or digestive bitters tincture before meals",
+      "Consider trying an elimination diet and working with a functional dietitian",
+      "Focus on warm, cooked meals",
+      "Try grassfed or pastured bone broth",
+      "Eat bitter veggies or take a digestive bitters tincture before meals",
       "Add digestive spices (Fennel, Fenugreek, Coriander, Anise, etc)",
       "Try fermented foods (start with 1 tbsp of real sauerkraut daily)",
-      "Avoid eating foods that are cold, raw, or heavy"
+      "Avoid eating foods that are cold, raw, fried, or heavy"
     ],
-    herbs: ["Ginger", "Fennel Seed", "Slippery Elm", "Chamomile", "Gentian Root"]
+    herbs: ["Ginger", "Fennel Seed", "Slippery Elm", "Chamomile", "Gentian Root", "Plantain", "Meadowsweet", "Oatstraw", "Aloe Vera"]
   },
   {
     organ: "Kidneys",
@@ -130,7 +136,7 @@ export const supportData = [
       "Lemon and sea salt water",
       "Hydrating fruits and veggies",
       "Potassium-rich foods",
-      "Grass fed bone broth or miso",
+      "Grass fed bone broth",
       "Reduce high-oxalate foods"
     ],
     herbs: ["Nettle Leaf", "Corn Silk", "Marshmallow Root", "Horsetail", "Cranberry"]
@@ -160,7 +166,7 @@ export const supportData = [
       "Diaphragmatic breathing",
       "Daily fresh air",
       "Brisk walking or cardio",
-      "Use a humidifier or steam",
+      "Use a humidifier or herbal steam",
       "Process and release grief through somatic exercises, sounding, etc"
     ],
     nutrition: [
@@ -170,6 +176,6 @@ export const supportData = [
       "Spicy foods (garlic, horseradish)",
       "Sulfur-rich foods like onions"
     ],
-    herbs: ["Mullein Leaf", "Elecampane", "Thyme", "Licorice Root", "Osha Root"]
+    herbs: ["Mullein Leaf", "Elecampane", "Thyme", "Licorice Root", "Marshmallow Root"]
   }
 ];
