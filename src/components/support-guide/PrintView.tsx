@@ -24,9 +24,15 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
     <ul className="space-y-0.5 list-disc pl-4">
       {items.map((item, index) => (
         <li key={index} className="text-sage-700 text-xs">
-          {item.includes("Breathwork") || item.includes("Diaphragmatic breathing") ? (
+          {item.includes("Breathwork") ? (
             <>
-              {item} <span className="text-sage-500">(www.instagram.com/reel/C8Ihw0bRXcp/)</span>
+              Breathwork <span className="text-sage-500">(www.instagram.com/reel/C8Ihw0bRXcp/)</span>
+              {item.replace("Breathwork", "")}
+            </>
+          ) : item.includes("Diaphragmatic breathing") ? (
+            <>
+              Diaphragmatic breathing <span className="text-sage-500">(www.instagram.com/reel/C8Ihw0bRXcp/)</span>
+              {item.replace("Diaphragmatic breathing", "")}
             </>
           ) : (
             item
@@ -39,7 +45,7 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
   return (
     <div className="hidden print:block">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-serif text-sage-800 mb-3">Your Personalized Support Guide</h2>
+        <h2 className="text-2xl text-sage-800 mb-3">Your Personalized Support Guide</h2>
         {highScoringOrgans.length > 0 ? (
           <p className="text-sm text-sage-600 mb-6">
             Top scoring organs: {highScoringOrgans.slice(0, 3).map(({organ}) => organ).join(', ')}
@@ -57,7 +63,7 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
         return (
           <div key={data.organ} className="mb-8 page-break-inside-avoid">
             <div className="bg-sage-50 p-3 border-b border-sage-200 rounded-t-lg">
-              <h3 className="text-xl font-serif text-sage-800 flex items-center gap-2">
+              <h3 className="text-xl text-sage-800 flex items-center gap-2">
                 <Leaf className="h-5 w-5 text-sage-500" />
                 {data.organ} Support <span className="text-sm ml-2">(Score: {score})</span>
               </h3>

@@ -34,8 +34,8 @@ export const generateEmailContent = (scores: { [key: string]: number }): string 
   const highScoringOrgans = getHighScoringOrgans(scores);
   
   let emailContent = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #2d3748;">
-      <h2 style="color: #4a5568; font-family: 'Georgia', serif;">Your Personalized Support Guide</h2>
+    <div style="font-family: 'Libre Bodoni', serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #2d3748;">
+      <h2 style="color: #4a5568; font-family: 'Libre Bodoni', serif;">Your Personalized Support Guide</h2>
   `;
   
   if (highScoringOrgans.length > 0) {
@@ -55,7 +55,7 @@ export const generateEmailContent = (scores: { [key: string]: number }): string 
     emailContent += `
       <div style="margin-bottom: 30px; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #f7f9f7; padding: 12px; border-bottom: 1px solid #e2e8f0; border-top-left-radius: 8px; border-top-right-radius: 8px;">
-          <h3 style="color: #4a5568; font-family: 'Georgia', serif; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <h3 style="color: #4a5568; font-family: 'Libre Bodoni', serif; display: flex; align-items: center; gap: 8px; margin: 0;">
             ${organ} Support <span style="font-size: 14px; margin-left: 8px;">(Score: ${score})</span>
           </h3>
         </div>
@@ -67,8 +67,10 @@ export const generateEmailContent = (scores: { [key: string]: number }): string 
               <div style="background-color: #f7f9f7; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
                 <ul style="margin: 0; padding-left: 20px; color: #4b5563; font-size: 14px;">
                   ${organData.lifestyle.map(item => {
-                    if (item.includes("Breathwork") || item.includes("Diaphragmatic breathing")) {
-                      return `<li>${item} (<a href="https://www.instagram.com/reel/C8Ihw0bRXcp/" style="color: #68a684;">link</a>)</li>`;
+                    if (item.includes("Breathwork")) {
+                      return `<li><a href="https://www.instagram.com/reel/C8Ihw0bRXcp/" style="color: #68a684;">Breathwork</a>${item.replace("Breathwork", "")}</li>`;
+                    } else if (item.includes("Diaphragmatic breathing")) {
+                      return `<li><a href="https://www.instagram.com/reel/C8Ihw0bRXcp/" style="color: #68a684;">Diaphragmatic breathing</a>${item.replace("Diaphragmatic breathing", "")}</li>`;
                     }
                     return `<li>${item}</li>`;
                   }).join('')}

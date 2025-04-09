@@ -20,15 +20,30 @@ const SupportDetails = ({ data }: SupportDetailsProps) => {
     <ul className="space-y-1 list-disc pl-5">
       {items.map((item, index) => (
         <li key={index} className="text-sage-700 text-sm">
-          {item.includes("Breathwork") || item.includes("Diaphragmatic breathing") ? (
-            <a 
-              href="https://www.instagram.com/reel/C8Ihw0bRXcp/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-sage-500 underline"
-            >
-              {item}
-            </a>
+          {item.includes("Breathwork") ? (
+            <>
+              <a 
+                href="https://www.instagram.com/reel/C8Ihw0bRXcp/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-sage-500 underline"
+              >
+                Breathwork
+              </a>
+              {item.replace("Breathwork", "")}
+            </>
+          ) : item.includes("Diaphragmatic breathing") ? (
+            <>
+              <a 
+                href="https://www.instagram.com/reel/C8Ihw0bRXcp/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-sage-500 underline"
+              >
+                Diaphragmatic breathing
+              </a>
+              {item.replace("Diaphragmatic breathing", "")}
+            </>
           ) : (
             item
           )}
@@ -46,7 +61,7 @@ const SupportDetails = ({ data }: SupportDetailsProps) => {
       key={data.organ}
     >
       <div className="bg-sage-50 p-4 border-b border-sage-200">
-        <h3 className="text-xl font-serif text-sage-800 flex items-center gap-2">
+        <h3 className="text-xl text-sage-800 flex items-center gap-2">
           <Leaf className="h-5 w-5 text-sage-500" />
           Supporting Your {data.organ}
         </h3>
