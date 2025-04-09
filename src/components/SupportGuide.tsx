@@ -151,7 +151,7 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
     
     emailContent += `
         <div style="margin-top: 30px; text-align: center;">
-          <p style="font-size: 14px; color: #718096;">Begin with gentle support for your highest-scoring systems. Always consult with a healthcare provider before starting any new health regimen.</p>
+          <p style="font-size: 14px; color: #718096;">Begin with gentle support for your highest-scoring systems. Always consult with a healthcare provider before starting any new health regimen. For more support, <a href="https://calendly.com/healingfromscratch/customhealthroadmap" style="color: #68a684; text-decoration: underline;">click here</a> to schedule a Custom Health Roadmap Session.</p>
         </div>
       </div>
     `;

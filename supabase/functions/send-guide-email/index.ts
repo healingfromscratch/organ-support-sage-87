@@ -47,7 +47,7 @@ serve(async (req) => {
         </style>
       </head>
       <div style="text-align: center; margin-bottom: 30px;">
-        <img src="${logoUrl}" alt="Healing From Scratch" style="max-height: 120px; margin: 0 auto;" />
+        <img src="${logoUrl}" alt="Healing From Scratch" style="max-height: 120px; margin: 0 auto; background: transparent;" />
       </div>
       ${emailContent}
       <div style="margin-top: 40px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; font-family: 'Libre Bodoni', serif;">
@@ -56,6 +56,9 @@ serve(async (req) => {
         <p style="font-size: 14px; color: #718096; margin-bottom: 5px;">Clinical Herbalist</p>
         <p style="font-size: 14px; color: #718096;">
           <a href="https://linktr.ee/healingfromscratch" style="color: #68a684; text-decoration: underline;">https://linktr.ee/healingfromscratch</a>
+        </p>
+        <p style="font-size: 14px; color: #718096; margin-top: 10px;">
+          Begin with gentle support for this system. Some of the herbs listed in this guide can interact with medication. Always consult with a healthcare provider before starting any new health regimen. For more support, <a href="https://calendly.com/healingfromscratch/customhealthroadmap" style="color: #68a684; text-decoration: underline;">click here</a> to schedule a Custom Health Roadmap Session.
         </p>
       </div>
     `;

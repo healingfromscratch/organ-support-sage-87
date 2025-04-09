@@ -12,7 +12,7 @@ const Header = () => {
     duration: 0.5
   }}>
       <div className="flex flex-col items-center justify-center gap-2 mb-6">
-        <img src="/healing-from-scratch-logo.png" alt="Healing From Scratch" className="h-28 mb-4" />
+        <img src="/healing-from-scratch-logo.png" alt="Healing From Scratch" className="h-28 mb-4" style={{ background: 'transparent' }} />
         <div className="text-center mb-4">
           <p className="text-sage-800 font-serif">Vanessa Berenstein, MA RD FMN CCH</p>
           <p className="text-sage-600 text-sm">Holistic Dietitian</p>
