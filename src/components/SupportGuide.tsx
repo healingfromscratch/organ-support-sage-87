@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { supportData } from "../data/symptoms";
@@ -22,7 +23,7 @@ const SupportGuide = ({ scores }: SupportGuideProps) => {
   const getOrgansWithScores = () => {
     return Object.entries(scores)
       .sort(([, a], [, b]) => b - a)
-      .map(([organ]) => ({ organ, score }));
+      .map(([organ, score]) => ({ organ, score }));
   };
   
   const getSelectedData = () => {
