@@ -67,8 +67,8 @@ export const generateEmailContent = (scores: { [key: string]: number }): string 
               <div style="background-color: #f7f9f7; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
                 <ul style="margin: 0; padding-left: 20px; color: #4b5563; font-size: 14px;">
                   ${organData.lifestyle.map(item => {
-                    if (item.includes("Breathwork")) {
-                      return `<li><a href="https://www.instagram.com/reel/C8Ihw0bRXcp/" style="color: #68a684;">Breathwork</a>${item.replace("Breathwork", "")}</li>`;
+                    if (item.includes("Emotional release practices such as")) {
+                      return `<li>Emotional release practices such as <a href="https://www.instagram.com/reel/C8Ihw0bRXcp/" style="color: #68a684;">Breathwork</a>, Mindful Dance, Shaking (TRE), Crying with full permission, Scream therapy</li>`;
                     } else if (item.includes("Diaphragmatic breathing")) {
                       return `<li><a href="https://www.instagram.com/reel/C8Ihw0bRXcp/" style="color: #68a684;">Diaphragmatic breathing</a>${item.replace("Diaphragmatic breathing", "")}</li>`;
                     }
@@ -120,6 +120,9 @@ export const generateEmailContent = (scores: { [key: string]: number }): string 
   emailContent += `
       <div style="margin-top: 30px; text-align: center;">
         <p style="font-size: 14px; color: #718096;">Begin with gentle support for your highest-scoring systems. Always consult with a healthcare provider before starting any new health regimen. For more support, <a href="https://calendly.com/healingfromscratch/customhealthroadmap" style="color: #68a684; text-decoration: underline;">click here</a> to schedule a Custom Health Roadmap Session.</p>
+        <p style="font-size: 12px; color: #718096; margin-top: 16px;">
+          <strong>Disclaimer:</strong> The information provided in this guide is for educational purposes only and is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare professional before starting any new health program.
+        </p>
       </div>
     </div>
   `;

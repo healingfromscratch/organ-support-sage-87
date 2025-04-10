@@ -14,10 +14,9 @@ const Header = () => {
   }}>
       <div className="flex flex-col items-center justify-center gap-2 mb-6">
         <img 
-          src="/healing-from-scratch-logo.png" 
+          src="/lovable-uploads/44689fb9-c183-442b-a3cb-b6b8bf8c693c.png" 
           alt="Healing From Scratch" 
           className="h-28 mb-4" 
-          style={{ background: 'transparent', backgroundColor: 'transparent' }}
         />
         <div className="text-center mb-4">
           <p className="text-sage-800">Vanessa Berenstein, MA RD FMN CCH</p>
@@ -38,7 +37,7 @@ const Header = () => {
       <h2 className="text-xl md:text-2xl text-sage-600 italic">
         Questionnaire & Support Guide
       </h2>
-      <p className="mt-4 max-w-2xl mx-auto text-sage-700">Discover which of your body's elimination pathways need the most support to enhance your overall health and vitality. Fill out the questionnaire as honestly as possible to gain insight into where your system may be most vulnerable and where to focus your support.</p>
+      <p className="mt-4 max-w-2xl mx-auto text-sage-700 font-normal">Discover which of your body's elimination pathways need the most support to enhance your overall health and vitality. Fill out the questionnaire as honestly as possible to gain insight into where your system may be most vulnerable and where to focus your support.</p>
     </motion.header>;
 };
 

@@ -24,10 +24,9 @@ const PrintView = ({ highScoringOrgans, supportData }: PrintViewProps) => {
     <ul className="space-y-0.5 list-disc pl-4">
       {items.map((item, index) => (
         <li key={index} className="text-sage-700 text-xs">
-          {item.includes("Breathwork") ? (
+          {item.includes("Emotional release practices such as") ? (
             <>
-              Breathwork <span className="text-sage-500">(www.instagram.com/reel/C8Ihw0bRXcp/)</span>
-              {item.replace("Breathwork", "")}
+              Emotional release practices such as Breathwork <span className="text-sage-500">(www.instagram.com/reel/C8Ihw0bRXcp/)</span>, Mindful Dance, Shaking (TRE), Crying with full permission, Scream therapy
             </>
           ) : item.includes("Diaphragmatic breathing") ? (
             <>
